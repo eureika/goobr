@@ -12,15 +12,16 @@
             Date: <%= DateTime.parse(data[:date]).strftime('%m/%d/%Y') %> 
               <%= data[:when] %>
               <%= data[:time] %> <%= DateTime.parse(data[:time]).strftime('%p') %><br><br>
+
             <b>Estimated Fare</b>: $<%= number_with_precision(uber_price, precision: 2) %>
           </p>
         </div>
 
         <a href="/schedule">
-          <div class="button margin" style="width:298px"><h5>CANCEL</h5></div>
+          <button type='submit' style="width:297px"><h5>CANCEL</h5></button>
         </a> 
         <a href="/end">
-          <div class="button" style="width:298px"><h5>CONFIRM</h5></div>
+          <button type='submit' style="width:297px"><h5>CONFIRM</h5></button>
         </a>
       </div>
     </div>

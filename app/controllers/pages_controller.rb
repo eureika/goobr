@@ -5,7 +5,9 @@ class PagesController < ApplicationController
   end
   def about
   end
+
   def planner
+    render locals: {data: params}
   end
 
   def schedule
