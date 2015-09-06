@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "Goobr" %></title>
+
+  <%= favicon_link_tag 'logo.png' %>
+  
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic' rel='stylesheet' type='text/css'>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="goobr" style="height:30px; width: 40px">
+    <a href="/" ><%= image_tag "logo.png", width: '40px' %></a>
+  </div>
+  <%= yield %>
+  <div id="footer">
+    <a href="/about">About</a>
+  </div>
+</body>
+</html>

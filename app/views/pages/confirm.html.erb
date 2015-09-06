@@ -1,0 +1,62 @@
+<body>
+  <center>
+    <div id="main">
+      <p class="hello">Is this correct?</p>
+      <div id="map" style='height: 200px; width: 600px; opactiy: 1; border-radius: 5px 5px 0px 0px;'></div>
+      <div id="inner" style="width:600px">
+        <div style="border-radius: 0px 0px 5px 5px;">
+          <p>
+            <b><%= data[:name].upcase %></b><br>
+            Pickup Location: <%= data[:pickup] %><br>
+            Destination: <%= data[:destination] %><br>
+            Date: <%= DateTime.parse(data[:date]).strftime('%m/%d/%Y') %> 
+              <%= data[:when] %>
+              <%= data[:time] %> <%= DateTime.parse(data[:time]).strftime('%p') %><br><br>
+            <b>Estimated Fare</b>: $<%= number_with_precision(uber_price, precision: 2) %>
+          </p>
+        </div>
+
+        <a href="/schedule">
+          <div class="button margin" style="width:298px"><h5>CANCEL</h5></div>
+        </a> 
+        <a href="/end">
+          <div class="button" style="width:298px"><h5>CONFIRM</h5></div>
+        </a>
+      </div>
+    </div>
+  </center>
+
+  <script>
+    var data = <%= data.to_json.html_safe %>;
+
+    function initMap() {
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: {lat: 41.85, lng: -87.65}
+      });
+      directionsDisplay.setMap(map);
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      directionsService.route({
+        origin: "<%= data[:pickup] %>",
+        destination: "<%= data[:destination] %>",
+        travelMode: google.maps.TravelMode.DRIVING
+      }, function(response, status) {
+        console.log(response);
+        if (status === google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+          console.log(response.routes[0].legs[0].distance.text);
+          console.log(response.routes[0].legs[0].duration.text);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap" async defer></script>
+</body>

@@ -1,0 +1,51 @@
+<body>
+  <center>
+    <div id="main">
+      <p class="hello">Hello, Reika.</p>
+      <form method="get" action="/confirm">
+        <div id="inner" style="width:400px">
+          <div>
+            <p><input name="name" type="text" placeholder='Name your ride (optional)' /></p>
+            <hr>
+            <p><input name="pickup" type="text" placeholder='Enter pickup location' /></p>
+            <hr>
+            <p><input name="destination" type="text" placeholder='Enter destination' /></p>
+            <hr>
+            <p>
+              <input name="date" type="date" style="width:40%"/>
+              <select name="when" style="width:26%"/>
+                <option value='arrive by'>Arrive By</option>
+                <option value='depart at'>Depart At</option>
+              </select>
+              <input name="time" type="time" style="width:30%"/></p>
+            <hr>
+            <p>
+              <label for='repeat'>Repeat </label><input id="repeat" name="repeat" type="checkbox" style="width:initial"/>
+            </p>
+            <p id='extra-options' style='display:none'>
+              <label for='sun'>S</label><input id="sun" value="sun" name="days[]" type="checkbox" style="width:initial"/>
+              <label for='mon'>M</label><input id="mon" value="mon" name="days[]" type="checkbox" style="width:initial"/>
+              <label for='tue'>T</label><input id="tue" value="tue" name="days[]" type="checkbox" style="width:initial"/>
+              <label for='wed'>W</label><input id="wed" value="wed" name="days[]" type="checkbox" style="width:initial"/>
+              <label for='thu'>R</label><input id="thu" value="thu" name="days[]" type="checkbox" style="width:initial"/>
+              <label for='fri'>F</label><input id="fri" value="fri" name="days[]" type="checkbox" style="width:initial"/>
+              <label for='sat'>S</label><input id="sat" value="sat" name="days[]" type="checkbox" style="width:initial"/>
+            </p>
+          </div>
+
+          <button type='submit'><h5>SCHEDULE</h5></button>
+        </div>
+      </form>
+    </div>
+  </center>
+  <script>
+  $("#repeat").click(function() {
+    var checked = $("#repeat").is(":checked");
+    if (checked === true) {
+      $("#extra-options").show();
+    } else {
+      $('#extra-options').hide();
+    }
+  });
+  </script>
+</body>
